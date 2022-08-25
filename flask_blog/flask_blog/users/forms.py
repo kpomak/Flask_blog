@@ -8,108 +8,107 @@ from flask_blog.models import User
 
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Имя пользователя:',
+    username = StringField('Username:',
                            validators=[DataRequired(),
                                        Length(min=2, max=20)])
     email = StringField('Email:',
                         validators=[DataRequired(), Email()])
-    password = PasswordField('Пароль:', validators=[DataRequired()])
-    confirm_password = PasswordField('Подтвердить пароль',
+    password = PasswordField('Password:', validators=[DataRequired()])
+    confirm_password = PasswordField('Confirm password',
                                      validators=[DataRequired(),
                                                  EqualTo('password')])
-    submit = SubmitField('Зарегистрироваться')
+    submit = SubmitField('Submit')
 
 
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
         if user:
             raise ValidationError(
-                'Это имя занято. Пожалуйста, выберите другое.')
+                'This name is taken. Choose other name, please!')
 
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError(
-                'Этот email занят. Пожалуйста, выберите другой.')
+                'This email is taken. Choose other email, please!')
 
 
 class LoginForm(FlaskForm):
     email = StringField('Email:',
                         validators=[DataRequired(), Email()])
-    password = PasswordField('Пароль:', validators=[DataRequired()])
-    remember = BooleanField('Напомнить пароль')
-    submit = SubmitField('Войти')
+    password = PasswordField('Password:', validators=[DataRequired()])
+    remember = BooleanField('Remember password')
+    submit = SubmitField('Sign in')
 
 
 class UpdateAccountForm(FlaskForm):
-    username = StringField('Имя пользователя',
+    username = StringField('Username',
                            validators=[DataRequired(),
                                        Length(min=2, max=20)])
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
-    picture = FileField('Обновить фото профиля',
+    picture = FileField('Update photo',
                         validators=[FileAllowed(['jpg', 'png'])])
-    submit = SubmitField('Обновить')
+    submit = SubmitField('Update')
 
     def validate_username(self, username):
         if username.data != current_user.username:
             user = User.query.filter_by(username=username.data).first()
             if user:
-                raise ValidationError('Это имя занято. '
-                                      'Пожалуйста, выберите другой')
+                raise ValidationError('This name is taken. '
+                                      'Choose other name, please!')
 
     def validate_email(self, email):
         if email.data != current_user.email:
             user = User.query.filter_by(email=email.data).first()
             if user:
-                raise ValidationError('Этот email занят'
-                                      'Пожалуйста, выберите другой')
+                raise ValidationError('This email is taken '
+                                      'Choose other email, please!')
 
 
 class RequestResetForm(FlaskForm):
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
-    submit = SubmitField('Изменить пароль')
+    submit = SubmitField('Change password')
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user is None:
-            raise ValidationError('Аккаунт с данным email-адресом '
-                                  'отсутствует. '
-                                  'Вы можете зарегистрировать его')
+            raise ValidationError('This email is not taken. '
+                                  'You can register it!')
 
 
 class ResetPasswordForm(FlaskForm):
-    password = PasswordField('Пароль:', validators=[DataRequired()])
-    confirm_password = PasswordField('Подтвердите пароль',
+    password = PasswordField('Password:', validators=[DataRequired()])
+    confirm_password = PasswordField('COnfirm password',
                                      validators=[DataRequired(),
                                                  EqualTo('password')])
-    submit = SubmitField('Переустановить пароль')
+    submit = SubmitField('Submit')
 
 
 class UpdateAccountForm(FlaskForm):
-    username = StringField('Имя пользователя',
+    username = StringField('Username',
                            validators=[DataRequired(),
                                        Length(min=2, max=20)])
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
-    picture = FileField('Обновить фото профиля',
+    picture = FileField('Change photo',
                         validators=[FileAllowed(['jpg', 'png'])])
-    submit = SubmitField('Обновить')
+    submit = SubmitField('Submit')
 
     @staticmethod
     def validate_username(username):
         if username.data != current_user.username:
             user = User.query.filter_by(username=username.data).first()
             if user:
-                raise ValidationError('Это имя занято. '
-                                      'Пожалуйста, выберите другой')
+                raise ValidationError('This name is taken. '
+                                      'Choose other name, please!')
 
     @staticmethod
     def validate_email(email):
         if email.data != current_user.email:
             user = User.query.filter_by(email=email.data).first()
             if user:
-                raise ValidationError('Этот email занят'
-                                      'Пожалуйста, выберите другой')
+                raise ValidationError('This email is taken.'
+                                      'Choose other email, please!')

@@ -30,9 +30,9 @@
     <script src="{{ url_for('static', filename='js/modernizr-2.6.2.min.js') }}"></script>
 
     {% if title %}
-    <title>Flask-блог - {{ title }}</title>
+    <title>Flask-blog - {{ title }}</title>
     {% else %}
-    <title>Flask-блог</title>
+    <title>Flask-blog</title>
     {% endif %}
 
     {% block head %} {% endblock head %}
@@ -72,11 +72,13 @@
                                         <li><a href="/">Lifestyle blog</a></li>
                                         <li><a href="/">About</a></li>
                                         <li><a href="/">Contact</a></li>
+                                        {% if current_user.is_authenticated %}
+                                        <li></li><a href="/account">Hello, {{ current_user.username }}!</a></li>
+                                        {% endif %}
                                     </ul>
                                 </div>
-                                <div class="col-sm-5">
+                                <div class="col-sm-5" style="display: flex; justify-content: end">
                                     {% if current_user.is_authenticated %}
-                                    <h4>Hello, {{ current_user.username }}!</h4>
                                         <a class="nav-item nav-link navigation-links" href="{{ 
                                             url_for('users.account') }}"><i class="fa fa-user"></i>Profile</a>
                                         <a class="nav-item nav-link navigation-links" href="{{ 
