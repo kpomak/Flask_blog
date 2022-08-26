@@ -25,8 +25,8 @@ def register():
                     email=form.email.data, password=hashed_password)
         db.session.add(user)
         db.session.commit()
-        flash('Ваша учетная запись была создана!'
-              ' Теперь вы можете войти в систему', 'success')
+        flash('Your account was created!'
+              ' Now you can login', 'success')
         return redirect(url_for('users.login'))  
     return render_template('register.html', title='Register', form=form)
 
@@ -34,7 +34,7 @@ def register():
 @users.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
+        return redirect(url_for('posts.allpost'))
 
     form = LoginForm()
     if form.validate_on_submit():
@@ -43,11 +43,14 @@ def login():
                                                form.password.data):
             login_user(user, remember=form.remember.data)
 
-            return redirect(url_for('main.home'))
+            next_page = request.args.get('next')
+
+            return redirect(next_page) if next_page \
+                else redirect(url_for('posts.allpost'))
         else:
-            flash('Войти не удалось. Пожалуйста, '
-                  'проверьте электронную почту и пароль', 'внимание')
-    return render_template('login.html', title='Аутентификация', form=form)
+            flash('login failed. Check '
+                  'your email and password, please.', 'caution')
+    return render_template('login.html', title='Signing in', form=form)
 
 
 @users.route("/account", methods=['GET', 'POST'])
@@ -61,7 +64,7 @@ def account():
         current_user.username = form.username.data
         current_user.email = form.email.data
         db.session.commit()
-        flash('Ваш аккаунт был обновлен!', 'success')
+        flash('Your account was uodated', 'success')
         return redirect(url_for('users.account'))
     elif request.method == 'GET':
         form.username.data = current_user.username
@@ -77,6 +80,17 @@ def account():
     return render_template('account.html', title='Account',
                            image_file=image_file, form=form, posts=posts,
                            user=user)
+
+
+
+@users.route("/user/<string:username>")
+def user_posts(username):
+    page = request.args.get('page', 1, type=int)
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = Post.query.filter_by(author=user)\
+        .order_by(Post.date_posted.desc())\
+        .paginate(page=page, per_page=5)
+    return render_template('user_posts.html', posts=posts, user=user)
 
 
 @users.route("/logout")

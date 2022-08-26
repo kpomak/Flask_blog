@@ -1227,22 +1227,23 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 .btn-success {
-  background: #5cb85c;
-  color: #fff;
-  border: 2px solid #5cb85c;
+  background: #fbf2eb;
+  color: #000;
+  border: 2px solid #fbf2eb;
+  border-radius: 50px;
 }
 .btn-success:hover, .btn-success:focus, .btn-success:active {
-  background: #4cae4c !important;
-  border-color: #4cae4c !important;
+  background: #fbf2eb !important;
+  border-color: #fbf2eb !important;
 }
 .btn-success.btn-outline {
   background: transparent;
-  color: #5cb85c;
-  border: 2px solid #5cb85c;
+  color: #fbf2eb;
+  border: 2px solid fbf2eb;
 }
 .btn-success.btn-outline:hover, .btn-success.btn-outline:focus, .btn-success.btn-outline:active {
-  background: #5cb85c;
-  color: #fff;
+  background: #fbf2eb;
+  color: #000;
 }
 
 .btn-info {
