@@ -81,7 +81,7 @@ class RequestResetForm(FlaskForm):
 
 class ResetPasswordForm(FlaskForm):
     password = PasswordField('Password:', validators=[DataRequired()])
-    confirm_password = PasswordField('COnfirm password',
+    confirm_password = PasswordField('Confirm password',
                                      validators=[DataRequired(),
                                                  EqualTo('password')])
     submit = SubmitField('Submit')
@@ -112,3 +112,5 @@ class UpdateAccountForm(FlaskForm):
             if user:
                 raise ValidationError('This email is taken.'
                                       'Choose other email, please!')
+
+
