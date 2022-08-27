@@ -6,4 +6,4 @@ class Config:
     MAIL_PORT = 587
     MAIL_USE_TLS = True
     MAIL_USERNAME = "noreply.test@internet.ru"
-    MAIL_PASSWORD = "VgeuPwhA3B4XpddqviBs"
+    MAIL_PASSWORD = ""

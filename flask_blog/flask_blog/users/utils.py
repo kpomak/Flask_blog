@@ -9,13 +9,13 @@ from flask_blog import mail
 def send_reset_email(user):
     token = user.get_reset_token()
     msg = Message('Reset password request',
-                  sender='noreply.test@internet.ru', # исходящий email
+                  sender='noreply.test@internet.ru',
                   recipients=[user.email])
-    msg.body = f'''To reset your password,
-     go to the following link: {url_for('users.reset_token',
-                                       token=token, _external=True)}. 
-                                       If you did not make this request
-                                        then just ignore this letter'''
+    msg.body = f'''To reset your password, \
+        go to the following link:\n{url_for('users.reset_token',
+            token=token, _external=True,)}\
+                \nIf you did not make this request \
+                    then just ignore this letter.'''
     mail.send(msg)
 
 
