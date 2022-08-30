@@ -131,3 +131,4 @@ requirements.save
 flask_blog/README.rst
 flask_blog/tests/__init__.py
 flask_blog/tests/test_flask_blog.py
+flask_blog/flask_blog/security.py
