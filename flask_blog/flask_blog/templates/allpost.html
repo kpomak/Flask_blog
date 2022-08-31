@@ -21,7 +21,7 @@
   {% for post in posts.items %}
   <div class="container" style="display: flex; justify-content: space-between; margin: 30px;">
     <article class="media" style="display: flex; flex-direction: column; justify-content: center;"> 
-      <img class="rounded-circle article-img" style="margin-right: 5px;" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
+      <img style="width: 50px" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
       <a href="{{ url_for('users.user_posts', username=post.author.username) }}" id="author" style="margin: 0 auto;">{{ post.author.username }}</a>
     </article>
     

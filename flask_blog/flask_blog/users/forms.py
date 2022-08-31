@@ -87,30 +87,6 @@ class ResetPasswordForm(FlaskForm):
     submit = SubmitField('Submit')
 
 
-class UpdateAccountForm(FlaskForm):
-    username = StringField('Username',
-                           validators=[DataRequired(),
-                                       Length(min=2, max=20)])
-    email = StringField('Email',
-                        validators=[DataRequired(), Email()])
-    picture = FileField('Change photo',
-                        validators=[FileAllowed(['jpg', 'png'])])
-    submit = SubmitField('Submit')
 
-    @staticmethod
-    def validate_username(username):
-        if username.data != current_user.username:
-            user = User.query.filter_by(username=username.data).first()
-            if user:
-                raise ValidationError('This name is taken. '
-                                      'Choose other name, please!')
-
-    @staticmethod
-    def validate_email(email):
-        if email.data != current_user.email:
-            user = User.query.filter_by(email=email.data).first()
-            if user:
-                raise ValidationError('This email is taken.'
-                                      'Choose other email, please!')
 
 
