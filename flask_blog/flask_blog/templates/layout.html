@@ -12,6 +12,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Josefin+Slab:400,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Sacramento" rel="stylesheet">
+    <link type="Image/x-icon" href="{{ url_for('static', filename='icons/favicon.png') }}" rel="icon">
 
 
     <!-- Animate.css -->
@@ -37,6 +38,12 @@
 
     {% block head %} {% endblock head %}
 
+    <style>
+        body {
+            background-image: url('../static/pictures/back.jpg');
+            background-size: cover;
+        }
+    </style>
     {% block style %} {% endblock style %}
 
 
@@ -100,24 +107,26 @@
                 </div>
             </div>
         </nav>
-        <main role="main" class="container">
-            <div class="row">
-                <div class="col-md-10">
-                    {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                    {% for category, message in messages %}
-                    <div class="alert alert-{{ category }}">
-                        {{ message }}
+        <div class="flask-blog-main">
+            <main role="main" class="container">
+                <div class="row">
+                    <div class="col-md-10">
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                        {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+    
+                        {% block content %}{% endblock %}
                     </div>
-                    {% endfor %}
-                    {% endif %}
-                    {% endwith %}
-
-                    {% block content %}{% endblock %}
                 </div>
-            </div>
-        </main>
-
+            </main>
+    
+        </div>
         <footer id="fh5co-footer" role="contentinfo">
             <div class="container">
                 <div class="row row-pb-md">

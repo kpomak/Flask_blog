@@ -1,10 +1,20 @@
 {% extends "layout.html" %}
+{% block style %} 
+    <style>
+        .error-403 {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            margin: 25px auto;
+        }
+        .error-img {
+            height: 600px;
+        }    
+    </style>  
+{% endblock style %}
 {% block content %}
-    <div class="content-section">
-        <h1>У вас нет на это разрешения (403)</h1>
-        <p>Пожалуйста, проверьте свой аккаунт и повторите попытку</p>
-    </div>
+        <div class="error-403">
+            <img class="error-img" src="https://i.gifer.com/QRGr.gif" alt="403">
+            <div class="text-403">You don't have permissions!!</div>
+        </div>
 {% endblock content %}
-
-
-https://i.gifer.com/QRGr.gif

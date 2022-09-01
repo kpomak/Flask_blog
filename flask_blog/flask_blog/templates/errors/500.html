@@ -1,10 +1,20 @@
 {% extends "layout.html" %}
+{% block style %} 
+    <style>
+        .error-500 {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            margin: 25px auto;
+        }
+        .error-img {
+            height: 600px;
+        }    
+    </style>  
+{% endblock style %}
 {% block content %}
-    <div class="content-section">
-        <h1>Что-то пошло не так (500)</h1>
-        <p>У нас проблемы. Пожалуйста, попробуйте еще раз в ближайшее время</p>
-    </div>
+        <div class="error-500">
+            <img class="error-img" src="https://i.gifer.com/7VE.gif" alt="500">
+            <div class="text-500">We have some troubles.. Try again in few minuts, please!</div>
+        </div>
 {% endblock content %}
-
-
-https://i.gifer.com/7VE.gif
