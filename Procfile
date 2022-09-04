@@ -1,1 +1,1 @@
-web:gunicorn flask_blog/run: app
+web: python3 flask_blog/run.py
