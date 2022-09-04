@@ -1,4 +1,4 @@
-from flask_blog.mail_password import PASSWORD
+# from flask_blog.mail_password import PASSWORD
 
 class Config:
     SQLALCHEMY_DATABASE_URI = 'sqlite:///site.db'
@@ -8,4 +8,4 @@ class Config:
     MAIL_PORT = 587
     MAIL_USE_TLS = True
     MAIL_USERNAME = "noreply.test@internet.ru"
-    MAIL_PASSWORD = PASSWORD
+    MAIL_PASSWORD = "VgeuPwhA3B4XpddqviBs"
